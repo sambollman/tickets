@@ -1,0 +1,40 @@
+from random import choice
+
+# The number of tickets needed
+TICKETS = 47
+
+# The number of values per ticket from the first hat
+VALUES = 5
+
+# One hat has the numbers 1-99 for the first five numbers of each ticket
+hat = list(range(1, 100))
+
+# The other hat has the numbers 1-99 for the final number of each ticket
+final = list(range(1, 100))
+
+# Generate tickets
+for i in range(TICKETS):
+    ticket = []
+
+    # Pick values from the first hat
+    for j in range(VALUES):
+        # Replenish the hat if empty
+        if len(hat) == 0:
+            hat = list(range(1, 100))
+
+        # Draw a value from the hat
+        value = choice(hat)
+        ticket.append(value)
+        hat.remove(value)
+
+    # Replenish the final hat if empty
+    if len(final) == 0:
+        final = list(range(1, 100))
+
+    # Pick the final value
+    value = choice(final)
+    ticket.append(value)
+    final.remove(value)
+
+    # Output the ticket
+    print(' '.join([str(value) for value in ticket]))
